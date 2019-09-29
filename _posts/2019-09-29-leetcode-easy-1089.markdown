@@ -1,0 +1,85 @@
+---
+layout: post
+title:  "duplicate-zeros"
+date:   2019-09-29 11:00:00 +0800
+categories: leetcode easy 1089
+---
+
+题目：
+Given a fixed length array arr of integers, duplicate each occurrence of zero, shifting the remaining elements to the right.
+
+Note that elements beyond the length of the original array are not written.
+
+Do the above modifications to the input array in place, do not return anything from your function.
+
+
+思路:  
+* 遍历，从头遍历，遇到0，把后续的数组都往后移  
+* 双指针：  
+    1. 维护两个指针头指针i，尾指针j，遍历一遍数组，当遇到0时，j--  
+    2. 头指针i到尾指针j位置时，i以后的位置即逝出现0，也会位于数组之外，因此循环结束条件i小于j  
+    3. 如果j位置不变，代表数组中没0  
+    4. 倒着遍历指针i, j。循环遍历数组，当j >= i时，代表j往前的数组都非0，没必要继续移动数组，因此尾循环结束条件。令arr[i] = arr[j]，如果arr[j] = 0，此时，会重复一次0，因此arr[--i] = 0  
+    5. j所指向的末尾数字，如果是0，存在两种处理方式，当且仅当满足k > j，此时需要重复末尾的0，其他情况不需要。这是因为：头指针 > 尾指针的时候，就需要出现2次。因为最后一个0，是让尾指针--计数了的。其他情况要么尾指针没动，要么出现1次和出现2次结果一样，用例可查看错误案例  
+    6. 如遍历倒数第二步i和j分别为1 0，下一步最后一步i为0，j也为0，此时j位置没有变，即没计数，此种情况不需要重复末尾的0；如倒数第二步i和j分别为0 1， 最后一步i为0，j为1，此时j位置改变，被计数，此种情况需要重复末尾的0；如果倒数第二步i和j中间还间隔一个数，要么可以转化为上述情况，要么可类似分析。总之，当且仅当j小于i时，j经历了--计数，需要重复末尾的0
+
+
+代码:
+```
+class Solution {
+    public void duplicateZeros(int[] arr) {
+        if (arr == null || arr.length <= 1) {
+            return;
+        }
+        int i;
+        int j = arr.length - 1;
+        for (i = 0; i < j; i++) {
+            if (arr[i] == 0) {
+                j--;
+            }
+        }
+        if (j == arr.length - 1) {
+            return;
+        }
+
+        int k = i;
+        i = arr.length - 1;
+        arr[i] = arr[j];
+        if (arr[j] == 0 && k > j) {
+            arr[--i] = arr[j];
+        }
+        for (i--, j--; j < i && j >= 0; j--, i--) {
+            arr[i] = arr[j];
+            if (arr[j] == 0) {
+                    arr[--i] = 0;
+            }
+        }
+    }
+}
+```
+
+错误案例：  
+Wrong Answer 2: 末尾0需要重复
+```
+Input:
+[1,5,2,0,6,8,0,6,0]
+Output:
+[1,5,2,0,0,6,8,6,0]
+Expected:
+[1,5,2,0,0,6,8,0,0]
+```
+Wrong Answer 1: 末尾0不需要重复
+```
+Input:
+[9,9,9,4,8,0,0,3,7,2,0,0,0,0,9,1,0,0,1,1,0,5,6,3,1,6,0,0,2,3,4,7,0,3,9,3,6,5,8,9,1,1,3,2,0,0,7,3,3,0,5,7,0,8,1,9,6,3,0,8,8,8,8,0,0,5,0,0,0,3,7,7,7,7,5,1,0,0,8,0,0]
+Output:
+[9,9,9,4,8,0,0,0,3,7,2,0,0,0,0,0,0,0,0,9,1,0,0,0,0,1,1,0,0,5,6,3,1,6,0,0,0,0,2,3,4,7,0,0,3,9,3,6,5,8,9,1,1,3,2,0,0,0,0,7,3,3,0,0,5,7,0,0,8,1,9,6,3,0,0,8,8,8,8,0,0]
+Expected:
+[9,9,9,4,8,0,0,0,0,3,7,2,0,0,0,0,0,0,0,0,9,1,0,0,0,0,1,1,0,0,5,6,3,1,6,0,0,0,0,2,3,4,7,0,0,3,9,3,6,5,8,9,1,1,3,2,0,0,0,0,7,3,3,0,0,5,7,0,0,8,1,9,6,3,0,0,8,8,8,8,0]
+```
+
+
+结果：
+
+Runtime: 1 ms, 打败95.12%  
+Memory Usage: 37.4 MB, 打败100%
