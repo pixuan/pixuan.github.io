@@ -1,4 +1,68 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-09-29T11:33:17+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">duplicate-zeros</title><link href="http://localhost:4000/leetcode/easy/1089/2019/09/29/leetcode-easy-1089.html" rel="alternate" type="text/html" title="duplicate-zeros" /><published>2019-09-29T11:00:00+08:00</published><updated>2019-09-29T11:00:00+08:00</updated><id>http://localhost:4000/leetcode/easy/1089/2019/09/29/leetcode-easy-1089</id><content type="html" xml:base="http://localhost:4000/leetcode/easy/1089/2019/09/29/leetcode-easy-1089.html">&lt;p&gt;题目：
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-09T17:26:20+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">pixuan.github.io</title><subtitle>Just Personal Blog</subtitle><entry><title type="html">Problems with Chinese Fonts in iText-PDF</title><link href="http://localhost:4000/java/encoding/itext/2019/10/09/java-encoding-itext.html" rel="alternate" type="text/html" title="Problems with Chinese Fonts in iText-PDF" /><published>2019-10-09T17:00:00+08:00</published><updated>2019-10-09T17:00:00+08:00</updated><id>http://localhost:4000/java/encoding/itext/2019/10/09/java-encoding-itext</id><content type="html" xml:base="http://localhost:4000/java/encoding/itext/2019/10/09/java-encoding-itext.html">&lt;p&gt;一、服务器不再单独维护字体，添加simsun.ttf文件到项目中&lt;br /&gt;
+无法获取到resources中的ttf文件，查询得知需要修改pom文件&lt;br /&gt;
+&lt;a href=&quot;https://stackoverflow.com/questions/44572557/flying-saucer-pdf-table-name-does-not-exist-in-exception-on-ubuntu&quot;&gt;https://stackoverflow.com/questions/44572557/flying-saucer-pdf-table-name-does-not-exist-in-exception-on-ubuntu&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;resources&amp;gt;
+            &amp;lt;resource&amp;gt;
+                &amp;lt;directory&amp;gt;src/main/resources&amp;lt;/directory&amp;gt;
+                &amp;lt;filtering&amp;gt;true&amp;lt;/filtering&amp;gt;
+                &amp;lt;excludes&amp;gt;
+                    &amp;lt;exclude&amp;gt;fonts/*&amp;lt;/exclude&amp;gt;
+                &amp;lt;/excludes&amp;gt;
+            &amp;lt;/resource&amp;gt;
+            &amp;lt;resource&amp;gt;
+                &amp;lt;directory&amp;gt;src/main/resources&amp;lt;/directory&amp;gt;
+                &amp;lt;filtering&amp;gt;false&amp;lt;/filtering&amp;gt;
+                &amp;lt;includes&amp;gt;
+                    &amp;lt;include&amp;gt;fonts/*&amp;lt;/include&amp;gt;
+                &amp;lt;/includes&amp;gt;
+            &amp;lt;/resource&amp;gt;
+        &amp;lt;/resources&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;然后直接引用即可&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;addFont(&quot;/fonts/samplefont.ttf&quot;, BaseFont.IDENTITY_H,BaseFont.EMBEDDED);&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;二、修改simsun字体为思源宋体&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;下载思源宋体文件，Language-specific OTFs -&amp;gt; Simplified Chinese&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/adobe-fonts/source-han-serif/tree/release/&quot;&gt;https://github.com/adobe-fonts/source-han-serif/tree/release/&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;添加文件到/fonts目录，修改字体引用为/fonts/SourceHan.otf，结果中文显示无效&lt;/li&gt;
+  &lt;li&gt;修改为ttf后缀，依然无效&lt;/li&gt;
+  &lt;li&gt;求助网上&lt;a href=&quot;https://stackoverflow.com/questions/23958538/problems-with-chinese-fonts-in-itext-pdf-on-windows-machines&quot;&gt;https://stackoverflow.com/questions/23958538/problems-with-chinese-fonts-in-itext-pdf-on-windows-machines&lt;/a&gt;&lt;br /&gt;
+免费字体网： &lt;a href=&quot;https://www.freechinesefont.com/&quot;&gt;https://www.freechinesefont.com/&lt;/a&gt;&lt;br /&gt;
+使用回答中的hxb-meixinti.ttf依然无效；hxb-meixinti.ttf用例确实有效，但是结合html文件无效，此处应该怀疑html可能是bug点&lt;/li&gt;
+  &lt;li&gt;查看itext使用版本为2.0.8，搜索iText 2.0.8 html to pdf&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/lxz946786639/article/details/51184502&quot;&gt;https://blog.csdn.net/lxz946786639/article/details/51184502&lt;/a&gt;， 文中提示：&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;为了解决中文问题，请在body中加入样式 font-family: SimSun;&lt;br /&gt;
+其中 “c://windows//fonts//simsun.ttc,1” 使用Windows系统字体，和html页面中font-family: SimSun; 对应。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;故知需修改html文件中的font-family
+&lt;a href=&quot;https://www.w3school.com.cn/css/pr_font_font-family.asp&quot;&gt;https://www.w3school.com.cn/css/pr_font_font-family.asp&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;查看思源宋体font-family&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.jianshu.com/p/44ef95b2c86f&quot;&gt;https://www.jianshu.com/p/44ef95b2c86f&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;思源黑体 :  Source Han Sans CN&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;修改ccs：&lt;code class=&quot;highlighter-rouge&quot;&gt;font-family: 'Source Han Serif SC';&lt;/code&gt;&lt;br /&gt;
+Bingo～&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;解决table在pdf中显示不全问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.iteye.com/blog/skyfar666-2001353&quot;&gt;https://www.iteye.com/blog/skyfar666-2001353&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;模版中在table 加样式 style=”margin-top: 60px;table-layout:fixed; word-break:break-strict;”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;思源宋体协议文件搞定&lt;/p&gt;</content><author><name></name></author><summary type="html">一、服务器不再单独维护字体，添加simsun.ttf文件到项目中 无法获取到resources中的ttf文件，查询得知需要修改pom文件 https://stackoverflow.com/questions/44572557/flying-saucer-pdf-table-name-does-not-exist-in-exception-on-ubuntu &amp;lt;resources&amp;gt; &amp;lt;resource&amp;gt; &amp;lt;directory&amp;gt;src/main/resources&amp;lt;/directory&amp;gt; &amp;lt;filtering&amp;gt;true&amp;lt;/filtering&amp;gt; &amp;lt;excludes&amp;gt; &amp;lt;exclude&amp;gt;fonts/*&amp;lt;/exclude&amp;gt; &amp;lt;/excludes&amp;gt; &amp;lt;/resource&amp;gt; &amp;lt;resource&amp;gt; &amp;lt;directory&amp;gt;src/main/resources&amp;lt;/directory&amp;gt; &amp;lt;filtering&amp;gt;false&amp;lt;/filtering&amp;gt; &amp;lt;includes&amp;gt; &amp;lt;include&amp;gt;fonts/*&amp;lt;/include&amp;gt; &amp;lt;/includes&amp;gt; &amp;lt;/resource&amp;gt; &amp;lt;/resources&amp;gt; 然后直接引用即可 addFont(&quot;/fonts/samplefont.ttf&quot;, BaseFont.IDENTITY_H,BaseFont.EMBEDDED);</summary></entry><entry><title type="html">duplicate-zeros</title><link href="http://localhost:4000/leetcode/easy/1089/2019/09/29/leetcode-easy-1089.html" rel="alternate" type="text/html" title="duplicate-zeros" /><published>2019-09-29T11:00:00+08:00</published><updated>2019-09-29T11:00:00+08:00</updated><id>http://localhost:4000/leetcode/easy/1089/2019/09/29/leetcode-easy-1089</id><content type="html" xml:base="http://localhost:4000/leetcode/easy/1089/2019/09/29/leetcode-easy-1089.html">&lt;p&gt;题目：
 Given a fixed length array arr of integers, duplicate each occurrence of zero, shifting the remaining elements to the right.&lt;/p&gt;
 
 &lt;p&gt;Note that elements beyond the length of the original array are not written.&lt;/p&gt;
