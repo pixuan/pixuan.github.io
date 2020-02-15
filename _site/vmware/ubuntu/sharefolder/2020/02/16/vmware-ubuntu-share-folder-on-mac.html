@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Vmware ubuntu share folder on mac | pixuan.github.io</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Vmware ubuntu share folder on mac" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="mac上的vmware，ubuntu设置共享文件夹 vmware设置中添加共享文件夹 /mnt中有hgfs但没共享文件的方法 https://www.cnblogs.com/jiu0821/p/5946062.html 注意：此处不能添加随机启动后自动挂载，否则会无法启动，进入emergency mode 所以：只能每次进行挂载，并检测是否已经挂载 fix: Welcome to emergency mode https://blog.csdn.net/weixin_38705903/article/details/87890393 https://blog.csdn.net/xiangwanpeng/article/details/78083075 检查是否已经挂载/mnt/hgfs目录 https://www.cnblogs.com/cheyunhua/p/11377599.html LINUX nautilus 命令行命令打开指定文件夹 https://blog.csdn.net/weixin_41123761/article/details/78789332 双击运行.sh文件 https://www.cnblogs.com/shuo1208/p/6744876.html https://www.cnblogs.com/EasonJim/p/7467457.html Called “net usershare info” but it failed: Failed to execute child process “net” https://blog.csdn.net/discoverer100/article/details/103052692 nonempty问题 https://blog.csdn.net/u011770788/article/details/45823793?utm_source=itdadao&amp;utm_medium=referral" />
+<meta property="og:description" content="mac上的vmware，ubuntu设置共享文件夹 vmware设置中添加共享文件夹 /mnt中有hgfs但没共享文件的方法 https://www.cnblogs.com/jiu0821/p/5946062.html 注意：此处不能添加随机启动后自动挂载，否则会无法启动，进入emergency mode 所以：只能每次进行挂载，并检测是否已经挂载 fix: Welcome to emergency mode https://blog.csdn.net/weixin_38705903/article/details/87890393 https://blog.csdn.net/xiangwanpeng/article/details/78083075 检查是否已经挂载/mnt/hgfs目录 https://www.cnblogs.com/cheyunhua/p/11377599.html LINUX nautilus 命令行命令打开指定文件夹 https://blog.csdn.net/weixin_41123761/article/details/78789332 双击运行.sh文件 https://www.cnblogs.com/shuo1208/p/6744876.html https://www.cnblogs.com/EasonJim/p/7467457.html Called “net usershare info” but it failed: Failed to execute child process “net” https://blog.csdn.net/discoverer100/article/details/103052692 nonempty问题 https://blog.csdn.net/u011770788/article/details/45823793?utm_source=itdadao&amp;utm_medium=referral" />
+<link rel="canonical" href="http://localhost:4000/vmware/ubuntu/sharefolder/2020/02/16/vmware-ubuntu-share-folder-on-mac.html" />
+<meta property="og:url" content="http://localhost:4000/vmware/ubuntu/sharefolder/2020/02/16/vmware-ubuntu-share-folder-on-mac.html" />
+<meta property="og:site_name" content="pixuan.github.io" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-02-16T01:00:00+08:00" />
+<script type="application/ld+json">
+{"description":"mac上的vmware，ubuntu设置共享文件夹 vmware设置中添加共享文件夹 /mnt中有hgfs但没共享文件的方法 https://www.cnblogs.com/jiu0821/p/5946062.html 注意：此处不能添加随机启动后自动挂载，否则会无法启动，进入emergency mode 所以：只能每次进行挂载，并检测是否已经挂载 fix: Welcome to emergency mode https://blog.csdn.net/weixin_38705903/article/details/87890393 https://blog.csdn.net/xiangwanpeng/article/details/78083075 检查是否已经挂载/mnt/hgfs目录 https://www.cnblogs.com/cheyunhua/p/11377599.html LINUX nautilus 命令行命令打开指定文件夹 https://blog.csdn.net/weixin_41123761/article/details/78789332 双击运行.sh文件 https://www.cnblogs.com/shuo1208/p/6744876.html https://www.cnblogs.com/EasonJim/p/7467457.html Called “net usershare info” but it failed: Failed to execute child process “net” https://blog.csdn.net/discoverer100/article/details/103052692 nonempty问题 https://blog.csdn.net/u011770788/article/details/45823793?utm_source=itdadao&amp;utm_medium=referral","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/vmware/ubuntu/sharefolder/2020/02/16/vmware-ubuntu-share-folder-on-mac.html"},"@type":"BlogPosting","url":"http://localhost:4000/vmware/ubuntu/sharefolder/2020/02/16/vmware-ubuntu-share-folder-on-mac.html","headline":"Vmware ubuntu share folder on mac","dateModified":"2020-02-16T01:00:00+08:00","datePublished":"2020-02-16T01:00:00+08:00","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="pixuan.github.io" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">pixuan.github.io</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Vmware ubuntu share folder on mac</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-02-16T01:00:00+08:00" itemprop="datePublished">Feb 16, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h3 id="mac上的vmwareubuntu设置共享文件夹">mac上的vmware，ubuntu设置共享文件夹</h3>
+<ul>
+  <li>vmware设置中添加共享文件夹</li>
+  <li>/mnt中有hgfs但没共享文件的方法</li>
+</ul>
+<p><a href="https://www.cnblogs.com/jiu0821/p/5946062.html">https://www.cnblogs.com/jiu0821/p/5946062.html</a><br />
+<code class="highlighter-rouge">注意：此处不能添加随机启动后自动挂载，否则会无法启动，进入emergency mode</code>
+<code class="highlighter-rouge">所以：只能每次进行挂载，并检测是否已经挂载</code></p>
+<ul>
+  <li>fix: Welcome to emergency mode</li>
+</ul>
+<p><a href="https://blog.csdn.net/weixin_38705903/article/details/87890393">https://blog.csdn.net/weixin_38705903/article/details/87890393</a>
+<a href="https://blog.csdn.net/xiangwanpeng/article/details/78083075">https://blog.csdn.net/xiangwanpeng/article/details/78083075</a></p>
+<ul>
+  <li>检查是否已经挂载/mnt/hgfs目录</li>
+</ul>
+<p><a href="https://www.cnblogs.com/cheyunhua/p/11377599.html">https://www.cnblogs.com/cheyunhua/p/11377599.html</a></p>
+<ul>
+  <li>LINUX nautilus 命令行命令打开指定文件夹</li>
+</ul>
+<p><a href="https://blog.csdn.net/weixin_41123761/article/details/78789332">https://blog.csdn.net/weixin_41123761/article/details/78789332</a></p>
+<ul>
+  <li>双击运行.sh文件</li>
+</ul>
+<p><a href="https://www.cnblogs.com/shuo1208/p/6744876.html">https://www.cnblogs.com/shuo1208/p/6744876.html</a>
+<a href="https://www.cnblogs.com/EasonJim/p/7467457.html">https://www.cnblogs.com/EasonJim/p/7467457.html</a></p>
+<ul>
+  <li>Called “net usershare info” but it failed: Failed to execute child process “net”</li>
+</ul>
+<p><a href="https://blog.csdn.net/discoverer100/article/details/103052692">https://blog.csdn.net/discoverer100/article/details/103052692</a></p>
+<ul>
+  <li>nonempty问题</li>
+</ul>
+<p><a href="https://blog.csdn.net/u011770788/article/details/45823793?utm_source=itdadao&amp;utm_medium=referral">https://blog.csdn.net/u011770788/article/details/45823793?utm_source=itdadao&amp;utm_medium=referral</a></p>
+
+<p>shell脚本:</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="k">if </span><span class="nb">grep</span> <span class="nt">-qs</span> <span class="s1">'/mnt/hgfs'</span> /proc/mounts<span class="p">;</span> <span class="k">then
+</span><span class="nb">echo</span> <span class="s2">"hgfs is mounted and open"</span><span class="p">;</span>
+<span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">password</span><span class="k">}</span><span class="s2">"</span>|sudo <span class="nt">-S</span> nautilus /mnt/hgfs
+<span class="k">else
+</span><span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">password</span><span class="k">}</span><span class="s2"> is not mounted. to mount it then open"</span>
+<span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">password</span><span class="k">}</span><span class="s2">"</span>|sudo <span class="nt">-S</span> vmhgfs-fuse .host:/ /mnt/hgfs <span class="nt">-o</span> nonempty
+<span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">password</span><span class="k">}</span><span class="s2">"</span>|sudo <span class="nt">-S</span> nautilus /mnt/hgfs
+<span class="k">fi</span>
+</code></pre></div></div>
+
+  </div><a class="u-url" href="/vmware/ubuntu/sharefolder/2020/02/16/vmware-ubuntu-share-folder-on-mac.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">pixuan.github.io</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">pixuan.github.io</li><li><a class="u-email" href="mailto:xixuanpi@gmail.com">xixuanpi@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/pixuan"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">pixuan</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Just Personal Blog</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

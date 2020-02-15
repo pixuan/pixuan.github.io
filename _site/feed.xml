@@ -1,4 +1,49 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-09T17:26:20+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">pixuan.github.io</title><subtitle>Just Personal Blog</subtitle><entry><title type="html">Problems with Chinese Fonts in iText-PDF</title><link href="http://localhost:4000/java/encoding/itext/2019/10/09/java-encoding-itext.html" rel="alternate" type="text/html" title="Problems with Chinese Fonts in iText-PDF" /><published>2019-10-09T17:00:00+08:00</published><updated>2019-10-09T17:00:00+08:00</updated><id>http://localhost:4000/java/encoding/itext/2019/10/09/java-encoding-itext</id><content type="html" xml:base="http://localhost:4000/java/encoding/itext/2019/10/09/java-encoding-itext.html">&lt;p&gt;一、服务器不再单独维护字体，添加simsun.ttf文件到项目中&lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-02-16T01:21:52+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">pixuan.github.io</title><subtitle>Just Personal Blog</subtitle><entry><title type="html">Vmware ubuntu share folder on mac</title><link href="http://localhost:4000/vmware/ubuntu/sharefolder/2020/02/16/vmware-ubuntu-share-folder-on-mac.html" rel="alternate" type="text/html" title="Vmware ubuntu share folder on mac" /><published>2020-02-16T01:00:00+08:00</published><updated>2020-02-16T01:00:00+08:00</updated><id>http://localhost:4000/vmware/ubuntu/sharefolder/2020/02/16/vmware-ubuntu-share-folder-on-mac</id><content type="html" xml:base="http://localhost:4000/vmware/ubuntu/sharefolder/2020/02/16/vmware-ubuntu-share-folder-on-mac.html">&lt;h3 id=&quot;mac上的vmwareubuntu设置共享文件夹&quot;&gt;mac上的vmware，ubuntu设置共享文件夹&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;vmware设置中添加共享文件夹&lt;/li&gt;
+  &lt;li&gt;/mnt中有hgfs但没共享文件的方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/jiu0821/p/5946062.html&quot;&gt;https://www.cnblogs.com/jiu0821/p/5946062.html&lt;/a&gt;&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;注意：此处不能添加随机启动后自动挂载，否则会无法启动，进入emergency mode&lt;/code&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;所以：只能每次进行挂载，并检测是否已经挂载&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;fix: Welcome to emergency mode&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/weixin_38705903/article/details/87890393&quot;&gt;https://blog.csdn.net/weixin_38705903/article/details/87890393&lt;/a&gt;
+&lt;a href=&quot;https://blog.csdn.net/xiangwanpeng/article/details/78083075&quot;&gt;https://blog.csdn.net/xiangwanpeng/article/details/78083075&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;检查是否已经挂载/mnt/hgfs目录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/cheyunhua/p/11377599.html&quot;&gt;https://www.cnblogs.com/cheyunhua/p/11377599.html&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;LINUX nautilus 命令行命令打开指定文件夹&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/weixin_41123761/article/details/78789332&quot;&gt;https://blog.csdn.net/weixin_41123761/article/details/78789332&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;双击运行.sh文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/shuo1208/p/6744876.html&quot;&gt;https://www.cnblogs.com/shuo1208/p/6744876.html&lt;/a&gt;
+&lt;a href=&quot;https://www.cnblogs.com/EasonJim/p/7467457.html&quot;&gt;https://www.cnblogs.com/EasonJim/p/7467457.html&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Called “net usershare info” but it failed: Failed to execute child process “net”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/discoverer100/article/details/103052692&quot;&gt;https://blog.csdn.net/discoverer100/article/details/103052692&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;nonempty问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/u011770788/article/details/45823793?utm_source=itdadao&amp;amp;utm_medium=referral&quot;&gt;https://blog.csdn.net/u011770788/article/details/45823793?utm_source=itdadao&amp;amp;utm_medium=referral&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;shell脚本:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-qs&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/mnt/hgfs'&lt;/span&gt; /proc/mounts&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;hgfs is mounted and open&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;|sudo &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; nautilus /mnt/hgfs
+&lt;span class=&quot;k&quot;&gt;else
+&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; is not mounted. to mount it then open&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;|sudo &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; vmhgfs-fuse .host:/ /mnt/hgfs &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; nonempty
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;password&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;|sudo &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; nautilus /mnt/hgfs
+&lt;span class=&quot;k&quot;&gt;fi&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">mac上的vmware，ubuntu设置共享文件夹 vmware设置中添加共享文件夹 /mnt中有hgfs但没共享文件的方法 https://www.cnblogs.com/jiu0821/p/5946062.html 注意：此处不能添加随机启动后自动挂载，否则会无法启动，进入emergency mode 所以：只能每次进行挂载，并检测是否已经挂载 fix: Welcome to emergency mode https://blog.csdn.net/weixin_38705903/article/details/87890393 https://blog.csdn.net/xiangwanpeng/article/details/78083075 检查是否已经挂载/mnt/hgfs目录 https://www.cnblogs.com/cheyunhua/p/11377599.html LINUX nautilus 命令行命令打开指定文件夹 https://blog.csdn.net/weixin_41123761/article/details/78789332 双击运行.sh文件 https://www.cnblogs.com/shuo1208/p/6744876.html https://www.cnblogs.com/EasonJim/p/7467457.html Called “net usershare info” but it failed: Failed to execute child process “net” https://blog.csdn.net/discoverer100/article/details/103052692 nonempty问题 https://blog.csdn.net/u011770788/article/details/45823793?utm_source=itdadao&amp;amp;utm_medium=referral</summary></entry><entry><title type="html">Problems with Chinese Fonts in iText-PDF</title><link href="http://localhost:4000/java/encoding/itext/2019/10/09/java-encoding-itext.html" rel="alternate" type="text/html" title="Problems with Chinese Fonts in iText-PDF" /><published>2019-10-09T17:00:00+08:00</published><updated>2019-10-09T17:00:00+08:00</updated><id>http://localhost:4000/java/encoding/itext/2019/10/09/java-encoding-itext</id><content type="html" xml:base="http://localhost:4000/java/encoding/itext/2019/10/09/java-encoding-itext.html">&lt;p&gt;一、服务器不再单独维护字体，添加simsun.ttf文件到项目中&lt;br /&gt;
 无法获取到resources中的ttf文件，查询得知需要修改pom文件&lt;br /&gt;
 &lt;a href=&quot;https://stackoverflow.com/questions/44572557/flying-saucer-pdf-table-name-does-not-exist-in-exception-on-ubuntu&quot;&gt;https://stackoverflow.com/questions/44572557/flying-saucer-pdf-table-name-does-not-exist-in-exception-on-ubuntu&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;resources&amp;gt;
