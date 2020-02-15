@@ -19,7 +19,7 @@ categories: vmware ubuntu shareFolder
 * LINUX nautilus 命令行命令打开指定文件夹  
 <https://blog.csdn.net/weixin_41123761/article/details/78789332>
 * 双击运行.sh文件  
-<https://www.cnblogs.com/shuo1208/p/6744876.html>
+<https://www.cnblogs.com/shuo1208/p/6744876.html>  
 <https://www.cnblogs.com/EasonJim/p/7467457.html>
 * Called "net usershare info" but it failed: Failed to execute child process “net”  
 <https://blog.csdn.net/discoverer100/article/details/103052692>
@@ -31,10 +31,10 @@ shell脚本:
 ```sh
 #!/bin/bash
 if grep -qs '/mnt/hgfs' /proc/mounts; then
-echo "hgfs is mounted and open";
+echo "/mnt/hgfs is mounted and open";
 echo "${password}"|sudo -S nautilus /mnt/hgfs
 else
-echo "${password} is not mounted. to mount it then open"
+echo "/mnt/hgfs is not mounted. to mount it then open"
 echo "${password}"|sudo -S vmhgfs-fuse .host:/ /mnt/hgfs -o nonempty
 echo "${password}"|sudo -S nautilus /mnt/hgfs
 fi

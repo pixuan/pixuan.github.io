@@ -69,7 +69,7 @@
 <ul>
   <li>双击运行.sh文件</li>
 </ul>
-<p><a href="https://www.cnblogs.com/shuo1208/p/6744876.html">https://www.cnblogs.com/shuo1208/p/6744876.html</a>
+<p><a href="https://www.cnblogs.com/shuo1208/p/6744876.html">https://www.cnblogs.com/shuo1208/p/6744876.html</a><br />
 <a href="https://www.cnblogs.com/EasonJim/p/7467457.html">https://www.cnblogs.com/EasonJim/p/7467457.html</a></p>
 <ul>
   <li>Called “net usershare info” but it failed: Failed to execute child process “net”</li>
@@ -83,10 +83,10 @@
 <p>shell脚本:</p>
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 <span class="k">if </span><span class="nb">grep</span> <span class="nt">-qs</span> <span class="s1">'/mnt/hgfs'</span> /proc/mounts<span class="p">;</span> <span class="k">then
-</span><span class="nb">echo</span> <span class="s2">"hgfs is mounted and open"</span><span class="p">;</span>
+</span><span class="nb">echo</span> <span class="s2">"/mnt/hgfs is mounted and open"</span><span class="p">;</span>
 <span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">password</span><span class="k">}</span><span class="s2">"</span>|sudo <span class="nt">-S</span> nautilus /mnt/hgfs
 <span class="k">else
-</span><span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">password</span><span class="k">}</span><span class="s2"> is not mounted. to mount it then open"</span>
+</span><span class="nb">echo</span> <span class="s2">"/mnt/hgfs is not mounted. to mount it then open"</span>
 <span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">password</span><span class="k">}</span><span class="s2">"</span>|sudo <span class="nt">-S</span> vmhgfs-fuse .host:/ /mnt/hgfs <span class="nt">-o</span> nonempty
 <span class="nb">echo</span> <span class="s2">"</span><span class="k">${</span><span class="nv">password</span><span class="k">}</span><span class="s2">"</span>|sudo <span class="nt">-S</span> nautilus /mnt/hgfs
 <span class="k">fi</span>
