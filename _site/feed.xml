@@ -1,4 +1,96 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-02-16T01:27:58+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">pixuan.github.io</title><subtitle>Just Personal Blog</subtitle><entry><title type="html">Vmware ubuntu share folder on mac</title><link href="http://localhost:4000/vmware/ubuntu/sharefolder/2020/02/16/vmware-ubuntu-share-folder-on-mac.html" rel="alternate" type="text/html" title="Vmware ubuntu share folder on mac" /><published>2020-02-16T01:00:00+08:00</published><updated>2020-02-16T01:00:00+08:00</updated><id>http://localhost:4000/vmware/ubuntu/sharefolder/2020/02/16/vmware-ubuntu-share-folder-on-mac</id><content type="html" xml:base="http://localhost:4000/vmware/ubuntu/sharefolder/2020/02/16/vmware-ubuntu-share-folder-on-mac.html">&lt;h3 id=&quot;mac上的vmwareubuntu设置共享文件夹&quot;&gt;mac上的vmware，ubuntu设置共享文件夹&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-15T11:37:17+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">pixuan.github.io</title><subtitle>Just Personal Blog</subtitle><entry><title type="html">Install ES dump and ES head</title><link href="http://localhost:4000/es/es-dump/es-head/2020/04/15/install-es-dump_and-head.html" rel="alternate" type="text/html" title="Install ES dump and ES head" /><published>2020-04-15T01:00:00+08:00</published><updated>2020-04-15T01:00:00+08:00</updated><id>http://localhost:4000/es/es-dump/es-head/2020/04/15/install-es-dump_and-head</id><content type="html" xml:base="http://localhost:4000/es/es-dump/es-head/2020/04/15/install-es-dump_and-head.html">&lt;h3 id=&quot;es-head&quot;&gt;es-head&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;引用 &lt;a href=&quot;https://github.com/mobz/elasticsearch-head&quot;&gt;https://github.com/mobz/elasticsearch-head&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;git clone git@github.com:mobz/elasticsearch-head.git&lt;/li&gt;
+  &lt;li&gt;根据NodeJS镜像制作es-head镜像&lt;br /&gt;
+修改Dockerfile如下
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM node:12.16.2-alpine3.9
+COPY . ./elasticsearch-head
+RUN npm config set registry https://registry.npm.taobao.org \
+  &amp;amp;&amp;amp; cd elasticsearch-head \
+  &amp;amp;&amp;amp; mkdir /tmp/phantomjs \
+  &amp;amp;&amp;amp; mv phantomjs-2.1.1-linux-x86_64.tar.bz2 /tmp/phantomjs \
+  &amp;amp;&amp;amp; npm install 
+WORKDIR /elasticsearch-head
+CMD [&quot;npm&quot;, &quot;run&quot;, &quot;start&quot;]
+EXPOSE 9100
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;提前下载phantomjs防止中途卡死&lt;/li&gt;
+  &lt;li&gt;执行&lt;code class=&quot;highlighter-rouge&quot;&gt;docker build -t elasticsearch-head:latest .&lt;/code&gt;可制作该镜像&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;es-dump&quot;&gt;es-dump&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;引用 &lt;a href=&quot;https://github.com/taskrabbit/elasticsearch-dump&quot;&gt;https://github.com/taskrabbit/elasticsearch-dump&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;拉取镜像
+&lt;code class=&quot;highlighter-rouge&quot;&gt;docker pull taskrabbit/elasticsearch-dump:v6.25.0&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;编写es_dump.sh&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;date &lt;span class=&quot;s2&quot;&gt;&quot;+%Y%m%d&quot;&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;date_ago&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;date &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$date&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; -1 day&quot;&lt;/span&gt; +%Y%m%d&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;basedir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/pzx/Workspaces/elk/dumpdata
+&lt;span class=&quot;nv&quot;&gt;bakdir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$basedir&lt;/span&gt;/&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$date_ago&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;ftp_host&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;127.0.0.1
+&lt;span class=&quot;nv&quot;&gt;ftp_user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;root
+&lt;span class=&quot;nv&quot;&gt;ftp_pass&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;root
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;======================================&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;## start daily es backup on &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$date_ago&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; ##&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$bakdir&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;then
+  &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;mkdir &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$bakdir&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+  mkdir &lt;span class=&quot;nv&quot;&gt;$bakdir&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;else
+  &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$bakdir&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; already exist&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;fi
+
+
+&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;query all es indices on &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$date_ago&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;indices&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; GET &lt;span class=&quot;s1&quot;&gt;'localhost:9200/_cat/indices/*?v&amp;amp;s=index'&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$date_ago&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; | awk &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'print $3'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;index &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$indices&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
+&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;start backing up &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$index&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+docker run &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--network&lt;/span&gt; host taskrabbit/elasticsearch-dump:v6.25.0 &lt;span class=&quot;nt&quot;&gt;--type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;data &lt;span class=&quot;nt&quot;&gt;--input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://localhost:9200/&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$index&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;|gzip &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$bakdir&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;/&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$index&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;.json.gz
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ended backing up &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$index&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;done
+
+&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;# start zipping dir &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$bakdir&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;  #&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$bakdir&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-czvf&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$date_ago&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;.tar.gz &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;.json.gz
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;# ended zipping dir &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$bakdir&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; #&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;# start sending zipped file &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$bakdir&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$date_ago&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;.tar.gz by ftp #&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$bakdir&lt;/span&gt;
+ftp &lt;span class=&quot;nt&quot;&gt;-niv&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;EOF&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;
+lftp-open -u &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ftp_user&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ftp_pass&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ftp_host&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;
+cd &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ftp_dir&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;
+binary
+mput &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$bakfile&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;
+quit
+&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;EOF
+&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;# ended sending zipped file &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$bakdir&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$date_ago&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;.tar.gz by ftp#&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;## ended daily es backup on &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$date_ago&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; ##&quot;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;======================================&quot;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;其中如果ES开启了xpack验证, 则需要更改&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;indices&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; elastic_user:elastic_password &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; GET &lt;span class=&quot;s1&quot;&gt;'localhost:9200/_cat/indices/*?v&amp;amp;s=index'&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$date_ago&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; | awk &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'print $3'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;以及&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--network&lt;/span&gt; host taskrabbit/elasticsearch-dump:v6.25.0 &lt;span class=&quot;nt&quot;&gt;--type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;data &lt;span class=&quot;nt&quot;&gt;--headers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'{&quot;Authorization&quot;: &quot;Basic &quot; + $authStr + &quot;}'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://localhost:9200/&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$index&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;|gzip &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$bakdir&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;/&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$index&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;.json.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;其中&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;authStr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Base64.encodeBase64&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;elastic_user:elastic_password&quot;&lt;/span&gt;.getBytes&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# elastic_user=elastic, elastic_password=elastic =&amp;gt; authStr=base64.b64encode(&quot;elastic:elastic&quot;.encode(&quot;utf-8&quot;))=ZWxhc3RpYzplbGFzdGlj&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;编写crontab, 如每日1点执行脚本
+&lt;code class=&quot;highlighter-rouge&quot;&gt;0 1 * * * sh es_dump.sh &amp;gt;&amp;gt; es_dump.log&lt;/code&gt;
+查看es_dump.log&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">es-head 引用 https://github.com/mobz/elasticsearch-head git clone git@github.com:mobz/elasticsearch-head.git 根据NodeJS镜像制作es-head镜像 修改Dockerfile如下 FROM node:12.16.2-alpine3.9 COPY . ./elasticsearch-head RUN npm config set registry https://registry.npm.taobao.org \ &amp;amp;&amp;amp; cd elasticsearch-head \ &amp;amp;&amp;amp; mkdir /tmp/phantomjs \ &amp;amp;&amp;amp; mv phantomjs-2.1.1-linux-x86_64.tar.bz2 /tmp/phantomjs \ &amp;amp;&amp;amp; npm install WORKDIR /elasticsearch-head CMD [&quot;npm&quot;, &quot;run&quot;, &quot;start&quot;] EXPOSE 9100 提前下载phantomjs防止中途卡死 执行docker build -t elasticsearch-head:latest .可制作该镜像</summary></entry><entry><title type="html">Vmware ubuntu share folder on mac</title><link href="http://localhost:4000/vmware/ubuntu/sharefolder/2020/02/16/vmware-ubuntu-share-folder-on-mac.html" rel="alternate" type="text/html" title="Vmware ubuntu share folder on mac" /><published>2020-02-16T01:00:00+08:00</published><updated>2020-02-16T01:00:00+08:00</updated><id>http://localhost:4000/vmware/ubuntu/sharefolder/2020/02/16/vmware-ubuntu-share-folder-on-mac</id><content type="html" xml:base="http://localhost:4000/vmware/ubuntu/sharefolder/2020/02/16/vmware-ubuntu-share-folder-on-mac.html">&lt;h3 id=&quot;mac上的vmwareubuntu设置共享文件夹&quot;&gt;mac上的vmware，ubuntu设置共享文件夹&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;vmware设置中添加共享文件夹&lt;/li&gt;
   &lt;li&gt;/mnt中有hgfs但没共享文件的方法&lt;/li&gt;

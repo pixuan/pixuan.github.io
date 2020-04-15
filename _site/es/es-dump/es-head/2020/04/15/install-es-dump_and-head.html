@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Install ES dump and ES head | pixuan.github.io</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Install ES dump and ES head" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="es-head 引用 https://github.com/mobz/elasticsearch-head git clone git@github.com:mobz/elasticsearch-head.git 根据NodeJS镜像制作es-head镜像 修改Dockerfile如下 FROM node:12.16.2-alpine3.9 COPY . ./elasticsearch-head RUN npm config set registry https://registry.npm.taobao.org \ &amp;&amp; cd elasticsearch-head \ &amp;&amp; mkdir /tmp/phantomjs \ &amp;&amp; mv phantomjs-2.1.1-linux-x86_64.tar.bz2 /tmp/phantomjs \ &amp;&amp; npm install WORKDIR /elasticsearch-head CMD [&quot;npm&quot;, &quot;run&quot;, &quot;start&quot;] EXPOSE 9100 提前下载phantomjs防止中途卡死 执行docker build -t elasticsearch-head:latest .可制作该镜像" />
+<meta property="og:description" content="es-head 引用 https://github.com/mobz/elasticsearch-head git clone git@github.com:mobz/elasticsearch-head.git 根据NodeJS镜像制作es-head镜像 修改Dockerfile如下 FROM node:12.16.2-alpine3.9 COPY . ./elasticsearch-head RUN npm config set registry https://registry.npm.taobao.org \ &amp;&amp; cd elasticsearch-head \ &amp;&amp; mkdir /tmp/phantomjs \ &amp;&amp; mv phantomjs-2.1.1-linux-x86_64.tar.bz2 /tmp/phantomjs \ &amp;&amp; npm install WORKDIR /elasticsearch-head CMD [&quot;npm&quot;, &quot;run&quot;, &quot;start&quot;] EXPOSE 9100 提前下载phantomjs防止中途卡死 执行docker build -t elasticsearch-head:latest .可制作该镜像" />
+<link rel="canonical" href="http://localhost:4000/es/es-dump/es-head/2020/04/15/install-es-dump_and-head.html" />
+<meta property="og:url" content="http://localhost:4000/es/es-dump/es-head/2020/04/15/install-es-dump_and-head.html" />
+<meta property="og:site_name" content="pixuan.github.io" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-04-15T01:00:00+08:00" />
+<script type="application/ld+json">
+{"headline":"Install ES dump and ES head","dateModified":"2020-04-15T01:00:00+08:00","datePublished":"2020-04-15T01:00:00+08:00","description":"es-head 引用 https://github.com/mobz/elasticsearch-head git clone git@github.com:mobz/elasticsearch-head.git 根据NodeJS镜像制作es-head镜像 修改Dockerfile如下 FROM node:12.16.2-alpine3.9 COPY . ./elasticsearch-head RUN npm config set registry https://registry.npm.taobao.org \\ &amp;&amp; cd elasticsearch-head \\ &amp;&amp; mkdir /tmp/phantomjs \\ &amp;&amp; mv phantomjs-2.1.1-linux-x86_64.tar.bz2 /tmp/phantomjs \\ &amp;&amp; npm install WORKDIR /elasticsearch-head CMD [&quot;npm&quot;, &quot;run&quot;, &quot;start&quot;] EXPOSE 9100 提前下载phantomjs防止中途卡死 执行docker build -t elasticsearch-head:latest .可制作该镜像","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/es/es-dump/es-head/2020/04/15/install-es-dump_and-head.html"},"@type":"BlogPosting","url":"http://localhost:4000/es/es-dump/es-head/2020/04/15/install-es-dump_and-head.html","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="pixuan.github.io" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">pixuan.github.io</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Install ES dump and ES head</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-04-15T01:00:00+08:00" itemprop="datePublished">Apr 15, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h3 id="es-head">es-head</h3>
+<ul>
+  <li>引用 <a href="https://github.com/mobz/elasticsearch-head">https://github.com/mobz/elasticsearch-head</a></li>
+  <li>git clone git@github.com:mobz/elasticsearch-head.git</li>
+  <li>根据NodeJS镜像制作es-head镜像<br />
+修改Dockerfile如下
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM node:12.16.2-alpine3.9
+COPY . ./elasticsearch-head
+RUN npm config set registry https://registry.npm.taobao.org \
+  &amp;&amp; cd elasticsearch-head \
+  &amp;&amp; mkdir /tmp/phantomjs \
+  &amp;&amp; mv phantomjs-2.1.1-linux-x86_64.tar.bz2 /tmp/phantomjs \
+  &amp;&amp; npm install 
+WORKDIR /elasticsearch-head
+CMD ["npm", "run", "start"]
+EXPOSE 9100
+</code></pre></div>    </div>
+  </li>
+  <li>提前下载phantomjs防止中途卡死</li>
+  <li>执行<code class="highlighter-rouge">docker build -t elasticsearch-head:latest .</code>可制作该镜像</li>
+</ul>
+
+<h3 id="es-dump">es-dump</h3>
+<ul>
+  <li>引用 <a href="https://github.com/taskrabbit/elasticsearch-dump">https://github.com/taskrabbit/elasticsearch-dump</a></li>
+  <li>拉取镜像
+<code class="highlighter-rouge">docker pull taskrabbit/elasticsearch-dump:v6.25.0</code></li>
+  <li>编写es_dump.sh</li>
+</ul>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="nv">date</span><span class="o">=</span><span class="sb">`</span>date <span class="s2">"+%Y%m%d"</span><span class="sb">`</span>
+<span class="nv">date_ago</span><span class="o">=</span><span class="sb">`</span>date <span class="nt">-d</span> <span class="s2">"</span><span class="nv">$date</span><span class="s2"> -1 day"</span> +%Y%m%d<span class="sb">`</span>
+<span class="nv">basedir</span><span class="o">=</span>/home/pzx/Workspaces/elk/dumpdata
+<span class="nv">bakdir</span><span class="o">=</span><span class="nv">$basedir</span>/<span class="s2">"</span><span class="nv">$date_ago</span><span class="s2">"</span>
+<span class="nv">ftp_host</span><span class="o">=</span>127.0.0.1
+<span class="nv">ftp_user</span><span class="o">=</span>root
+<span class="nv">ftp_pass</span><span class="o">=</span>root
+
+<span class="nb">echo</span> <span class="s2">"======================================"</span>
+<span class="nb">echo</span> <span class="s2">"## start daily es backup on </span><span class="nv">$date_ago</span><span class="s2"> ##"</span>
+<span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-d</span> <span class="nv">$bakdir</span> <span class="o">]</span><span class="p">;</span><span class="k">then
+  </span><span class="nb">echo</span> <span class="s2">"mkdir </span><span class="nv">$bakdir</span><span class="s2">"</span>
+  mkdir <span class="nv">$bakdir</span>
+<span class="k">else
+  </span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$bakdir</span><span class="s2"> already exist"</span>
+<span class="k">fi
+
+
+</span><span class="nb">echo</span> <span class="s2">"query all es indices on </span><span class="nv">$date_ago</span><span class="s2">"</span>
+<span class="nv">indices</span><span class="o">=</span><span class="k">$(</span>curl <span class="nt">-X</span> GET <span class="s1">'localhost:9200/_cat/indices/*?v&amp;s=index'</span> | <span class="nb">grep</span> <span class="s2">"</span><span class="nv">$date_ago</span><span class="s2">"</span> | awk <span class="o">{</span><span class="s1">'print $3'</span><span class="o">}</span><span class="k">)</span>
+<span class="k">for </span>index <span class="k">in</span> <span class="nv">$indices</span><span class="p">;</span> <span class="k">do
+</span><span class="nb">echo</span> <span class="s2">"start backing up </span><span class="nv">$index</span><span class="s2">"</span>
+docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">--network</span> host taskrabbit/elasticsearch-dump:v6.25.0 <span class="nt">--type</span><span class="o">=</span>data <span class="nt">--input</span><span class="o">=</span>http://localhost:9200/<span class="s2">"</span><span class="nv">$index</span><span class="s2">"</span> <span class="nt">--output</span><span class="o">=</span><span class="nv">$ </span>|gzip <span class="nt">-c</span> <span class="o">&gt;</span> <span class="s2">"</span><span class="nv">$bakdir</span><span class="s2">"</span>/<span class="s2">"</span><span class="nv">$index</span><span class="s2">"</span>.json.gz
+<span class="nb">echo</span> <span class="s2">"ended backing up </span><span class="nv">$index</span><span class="s2">"</span>
+<span class="k">done
+
+</span><span class="nb">echo</span> <span class="s2">"# start zipping dir </span><span class="nv">$bakdir</span><span class="s2">  #"</span>
+<span class="nb">cd</span> <span class="nv">$bakdir</span>
+<span class="nb">tar</span> <span class="nt">-czvf</span> <span class="s2">"</span><span class="nv">$date_ago</span><span class="s2">"</span>.tar.gz <span class="k">*</span>.json.gz
+<span class="nb">echo</span> <span class="s2">"# ended zipping dir </span><span class="nv">$bakdir</span><span class="s2"> #"</span>
+
+<span class="nb">echo</span> <span class="s2">"# start sending zipped file </span><span class="nv">$bakdir</span><span class="s2">/"</span><span class="nv">$date_ago</span><span class="s2">".tar.gz by ftp #"</span>
+<span class="nb">cd</span> <span class="nv">$bakdir</span>
+ftp <span class="nt">-niv</span> <span class="o">&lt;&lt;-</span> <span class="no">EOF</span><span class="sh">
+lftp-open -u </span><span class="nv">$ftp_user</span><span class="sh">,</span><span class="nv">$ftp_pass</span><span class="sh"> </span><span class="nv">$ftp_host</span><span class="sh">
+cd </span><span class="nv">$ftp_dir</span><span class="sh">
+binary
+mput </span><span class="nv">$bakfile</span><span class="sh">
+quit
+</span><span class="no">EOF
+</span><span class="nb">echo</span> <span class="s2">"# ended sending zipped file </span><span class="nv">$bakdir</span><span class="s2">/"</span><span class="nv">$date_ago</span><span class="s2">".tar.gz by ftp#"</span>
+
+<span class="nb">echo</span> <span class="s2">"## ended daily es backup on </span><span class="nv">$date_ago</span><span class="s2"> ##"</span>
+<span class="nb">echo</span> <span class="s2">"======================================"</span>
+
+</code></pre></div></div>
+<p>其中如果ES开启了xpack验证, 则需要更改</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">indices</span><span class="o">=</span><span class="k">$(</span>curl <span class="nt">-u</span> elastic_user:elastic_password <span class="nt">-X</span> GET <span class="s1">'localhost:9200/_cat/indices/*?v&amp;s=index'</span> | <span class="nb">grep</span> <span class="s2">"</span><span class="nv">$date_ago</span><span class="s2">"</span> | awk <span class="o">{</span><span class="s1">'print $3'</span><span class="o">}</span><span class="k">)</span>
+</code></pre></div></div>
+
+<p>以及</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">--rm</span> <span class="nt">-it</span> <span class="nt">--network</span> host taskrabbit/elasticsearch-dump:v6.25.0 <span class="nt">--type</span><span class="o">=</span>data <span class="nt">--headers</span><span class="o">=</span><span class="s1">'{"Authorization": "Basic " + $authStr + "}'</span> <span class="nt">--input</span><span class="o">=</span>http://localhost:9200/<span class="s2">"</span><span class="nv">$index</span><span class="s2">"</span> <span class="nt">--output</span><span class="o">=</span><span class="nv">$ </span>|gzip <span class="nt">-c</span> <span class="o">&gt;</span> <span class="s2">"</span><span class="nv">$bakdir</span><span class="s2">"</span>/<span class="s2">"</span><span class="nv">$index</span><span class="s2">"</span>.json.gz
+</code></pre></div></div>
+<p>其中</p>
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">authStr</span><span class="o">=</span>Base64.encodeBase64<span class="o">(</span><span class="s2">"elastic_user:elastic_password"</span>.getBytes<span class="o">(</span><span class="s2">"utf-8"</span><span class="o">))</span><span class="p">;</span> <span class="c"># elastic_user=elastic, elastic_password=elastic =&gt; authStr=base64.b64encode("elastic:elastic".encode("utf-8"))=ZWxhc3RpYzplbGFzdGlj</span>
+</code></pre></div></div>
+<ul>
+  <li>编写crontab, 如每日1点执行脚本
+<code class="highlighter-rouge">0 1 * * * sh es_dump.sh &gt;&gt; es_dump.log</code>
+查看es_dump.log</li>
+</ul>
+
+
+  </div><a class="u-url" href="/es/es-dump/es-head/2020/04/15/install-es-dump_and-head.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">pixuan.github.io</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">pixuan.github.io</li><li><a class="u-email" href="mailto:xixuanpi@gmail.com">xixuanpi@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/pixuan"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">pixuan</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Just Personal Blog</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
