@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>use bat script for maven install &amp; ftp put to remote server &amp; vbs script to login by ssh | pixuan.github.io</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="use bat script for maven install &amp; ftp put to remote server &amp; vbs script to login by ssh" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="maven 参考 https://blog.csdn.net/turkeyzhou/article/details/9264431 mvn本身也是.bat脚本，使用call，否则程序打包结束会自动退出，可使用pause暂停，手动继续 maven脚本 @echo off cd /xx/xx call mvn -Dmaven.test.skip -U clean package install pause" />
+<meta property="og:description" content="maven 参考 https://blog.csdn.net/turkeyzhou/article/details/9264431 mvn本身也是.bat脚本，使用call，否则程序打包结束会自动退出，可使用pause暂停，手动继续 maven脚本 @echo off cd /xx/xx call mvn -Dmaven.test.skip -U clean package install pause" />
+<link rel="canonical" href="http://localhost:4000/bat/maven/ftp/vbs/2020/04/23/bat-maven-install-ftp-put-vbs-run-shell.html" />
+<meta property="og:url" content="http://localhost:4000/bat/maven/ftp/vbs/2020/04/23/bat-maven-install-ftp-put-vbs-run-shell.html" />
+<meta property="og:site_name" content="pixuan.github.io" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-04-23T01:00:00+08:00" />
+<script type="application/ld+json">
+{"headline":"use bat script for maven install &amp; ftp put to remote server &amp; vbs script to login by ssh","dateModified":"2020-04-23T01:00:00+08:00","datePublished":"2020-04-23T01:00:00+08:00","description":"maven 参考 https://blog.csdn.net/turkeyzhou/article/details/9264431 mvn本身也是.bat脚本，使用call，否则程序打包结束会自动退出，可使用pause暂停，手动继续 maven脚本 @echo off cd /xx/xx call mvn -Dmaven.test.skip -U clean package install pause","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/bat/maven/ftp/vbs/2020/04/23/bat-maven-install-ftp-put-vbs-run-shell.html"},"@type":"BlogPosting","url":"http://localhost:4000/bat/maven/ftp/vbs/2020/04/23/bat-maven-install-ftp-put-vbs-run-shell.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="pixuan.github.io" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">pixuan.github.io</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">use bat script for maven install &amp; ftp put to remote server &amp; vbs script to login by ssh</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-04-23T01:00:00+08:00" itemprop="datePublished">Apr 23, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h3 id="maven">maven</h3>
+<p>参考 <a href="https://blog.csdn.net/turkeyzhou/article/details/9264431">https://blog.csdn.net/turkeyzhou/article/details/9264431</a><br />
+mvn本身也是.bat脚本，使用call，否则程序打包结束会自动退出，可使用pause暂停，手动继续<br />
+<code class="language-plaintext highlighter-rouge">maven脚本</code></p>
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@echo <span class="na">off</span>
+<span class="nb">cd</span> <span class="na">/xx/xx
+</span><span class="k">call</span> <span class="kd">mvn</span> <span class="na">-Dmaven</span>.test.skip <span class="na">-U </span><span class="kd">clean</span> <span class="kd">package</span> <span class="kd">install</span>
+<span class="nb">pause</span>
+</code></pre></div></div>
+
+<h3 id="ftp">ftp</h3>
+<p>参考 <a href="https://www.cnblogs.com/jjzd/p/6229160.html">https://www.cnblogs.com/jjzd/p/6229160.html</a><br />
+脚本分为两部分：可执行bat脚本和ftp命令文件<br />
+注意命名规范，最好不要叫ftp.bat,建议命名为upload.bat这样可能导致该脚本循环不停调用自身，因为脚本里会有ftp命令<br />
+<code class="language-plaintext highlighter-rouge">可执行bat脚本</code>：</p>
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@echo <span class="na">off</span>
+<span class="k">call</span> <span class="nb">ftp</span> <span class="na">-s</span><span class="nl">:D</span>:\ftp\ftp.txt
+<span class="nb">pause</span>
+</code></pre></div></div>
+<p>lcd为本地目录，cd为远端目录，mput可上传多个，put上传单个<br />
+<code class="language-plaintext highlighter-rouge">ftp命令ftp.txt</code>：</p>
+<pre><code class="language-txt">open 192.168.1.1
+ftp-user
+ftp-passwd
+prompt off
+lcd D:\ftp
+cd /home/myftp
+mput *
+prompt on
+bye
+quit
+</code></pre>
+
+<h3 id="vbs">vbs</h3>
+<p>参考 <a href="https://m.jb51.net/article/19399.htm">https://m.jb51.net/article/19399.htm</a><br />
+<a href="https://stackoverflow.com/questions/10521300/what-is-correct-syntax-to-use-awk-in-vbscript/61378908#61378908">https://stackoverflow.com/questions/10521300/what-is-correct-syntax-to-use-awk-in-vbscript/61378908#61378908</a><br />
+<a href="https://www.52pojie.cn/thread-1003908-1-1.html">https://www.52pojie.cn/thread-1003908-1-1.html</a><br />
+bat脚本通过ssh免输入密码登录，可以用vbs脚本实现, 如下脚本实现远程登录linux服务器，并杀掉旧应用进程，再重启该应用，最后退出命令行窗口功能</p>
+
+<pre><code class="language-vbs">Dim WshShell 
+Set WshShell=WScript.CreateObject("WScript.Shell") 
+WshShell.Run "cmd.exe"
+WScript.Sleep 1500 
+WshShell.SendKeys "ssh root@192.168.1.1"
+WshShell.SendKeys "{ENTER}"
+WScript.Sleep 1500 
+WshShell.SendKeys "root"
+WshShell.SendKeys "{ENTER}"
+WScript.Sleep 1500 
+WshShell.SendKeys "cd /home/xxx"
+WshShell.SendKeys "{ENTER}"
+WScript.Sleep 1500 
+WshShell.SendKeys "kill -SIGTERM `ps -ef|grep 'java -jar'|grep -v grep|awk '{{}print $2{}}'`"
+WshShell.SendKeys "{ENTER}"
+WScript.Sleep 1500 
+WshShell.SendKeys "java -jar xxx.jar &gt;&gt; run.log &amp;"
+WshShell.SendKeys "{ENTER}"
+WScript.Sleep 1500 
+WshShell.SendKeys "exit"
+WshShell.SendKeys "{ENTER}"
+WScript.Sleep 1500 
+WshShell.SendKeys "exit"
+WshShell.SendKeys "{ENTER}"
+</code></pre>
+
+<p>vbs对于特殊字符，可以使用{}包围该字符，如使用{{}发送{字符<br />
+此处由于jekyll的正则规则<code class="language-plaintext highlighter-rouge">Liquid syntax error Variable  was not properly terminated with regexp: /\\}\\}/</code>, 导致vbs示例代码中只能被迫使用单括号，其实此处正确应该使用{}包裹住{字符。 为了避免该问题，md文件中代码块采用<code class="language-plaintext highlighter-rouge">raw endraw</code>方式包裹。大括号到处都是坑啊 :( <a href="https://stackoverflow.com/questions/3426182/how-to-escape-liquid-template-tags">https://stackoverflow.com/questions/3426182/how-to-escape-liquid-template-tags</a> <br />
+bat脚本可通过<code class="language-plaintext highlighter-rouge">start run.vbs</code>运行run.vbs脚本。</p>
+
+<h3 id="bat">bat</h3>
+<p>对于整个bat脚本，可综合到一个文件进行执行</p>
+<div class="language-bat highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@echo <span class="na">off</span>
+<span class="nb">cd</span> <span class="na">/xx/xx
+</span><span class="k">call</span> <span class="kd">mvn</span> <span class="na">-Dmaven</span>.test.skip <span class="na">-U </span><span class="kd">clean</span> <span class="kd">package</span> <span class="kd">install</span>
+<span class="nb">pause</span>
+<span class="k">call</span> <span class="nb">ftp</span> <span class="na">-s</span><span class="nl">:D</span>:\ftp\ftp.txt
+<span class="nb">pause</span>
+<span class="nb">cd</span> <span class="na">/xx/xx
+</span><span class="nb">start</span> <span class="nb">run</span>.vbs
+</code></pre></div></div>
+
+  </div><a class="u-url" href="/bat/maven/ftp/vbs/2020/04/23/bat-maven-install-ftp-put-vbs-run-shell.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">pixuan.github.io</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">pixuan.github.io</li><li><a class="u-email" href="mailto:xixuanpi@gmail.com">xixuanpi@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/pixuan"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">pixuan</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Just Personal Blog</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

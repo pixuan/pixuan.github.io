@@ -1,10 +1,89 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-15T11:37:17+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">pixuan.github.io</title><subtitle>Just Personal Blog</subtitle><entry><title type="html">Install ES dump and ES head</title><link href="http://localhost:4000/es/es-dump/es-head/2020/04/15/install-es-dump_and-head.html" rel="alternate" type="text/html" title="Install ES dump and ES head" /><published>2020-04-15T01:00:00+08:00</published><updated>2020-04-15T01:00:00+08:00</updated><id>http://localhost:4000/es/es-dump/es-head/2020/04/15/install-es-dump_and-head</id><content type="html" xml:base="http://localhost:4000/es/es-dump/es-head/2020/04/15/install-es-dump_and-head.html">&lt;h3 id=&quot;es-head&quot;&gt;es-head&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-23T16:38:54+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">pixuan.github.io</title><subtitle>Just Personal Blog</subtitle><entry><title type="html">use bat script for maven install &amp;amp; ftp put to remote server &amp;amp; vbs script to login by ssh</title><link href="http://localhost:4000/bat/maven/ftp/vbs/2020/04/23/bat-maven-install-ftp-put-vbs-run-shell.html" rel="alternate" type="text/html" title="use bat script for maven install &amp; ftp put to remote server &amp; vbs script to login by ssh" /><published>2020-04-23T01:00:00+08:00</published><updated>2020-04-23T01:00:00+08:00</updated><id>http://localhost:4000/bat/maven/ftp/vbs/2020/04/23/bat-maven-install-ftp-put-vbs-run-shell</id><content type="html" xml:base="http://localhost:4000/bat/maven/ftp/vbs/2020/04/23/bat-maven-install-ftp-put-vbs-run-shell.html">&lt;h3 id=&quot;maven&quot;&gt;maven&lt;/h3&gt;
+&lt;p&gt;参考 &lt;a href=&quot;https://blog.csdn.net/turkeyzhou/article/details/9264431&quot;&gt;https://blog.csdn.net/turkeyzhou/article/details/9264431&lt;/a&gt;&lt;br /&gt;
+mvn本身也是.bat脚本，使用call，否则程序打包结束会自动退出，可使用pause暂停，手动继续&lt;br /&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;maven脚本&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@echo &lt;span class=&quot;na&quot;&gt;off&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;/xx/xx
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;call&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;mvn&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-Dmaven&lt;/span&gt;.test.skip &lt;span class=&quot;na&quot;&gt;-U &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;clean&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;install&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;pause&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ftp&quot;&gt;ftp&lt;/h3&gt;
+&lt;p&gt;参考 &lt;a href=&quot;https://www.cnblogs.com/jjzd/p/6229160.html&quot;&gt;https://www.cnblogs.com/jjzd/p/6229160.html&lt;/a&gt;&lt;br /&gt;
+脚本分为两部分：可执行bat脚本和ftp命令文件&lt;br /&gt;
+注意命名规范，最好不要叫ftp.bat,建议命名为upload.bat这样可能导致该脚本循环不停调用自身，因为脚本里会有ftp命令&lt;br /&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;可执行bat脚本&lt;/code&gt;：&lt;/p&gt;
+&lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@echo &lt;span class=&quot;na&quot;&gt;off&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;call&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ftp&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-s&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;:D&lt;/span&gt;:\ftp\ftp.txt
+&lt;span class=&quot;nb&quot;&gt;pause&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;lcd为本地目录，cd为远端目录，mput可上传多个，put上传单个&lt;br /&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ftp命令ftp.txt&lt;/code&gt;：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-txt&quot;&gt;open 192.168.1.1
+ftp-user
+ftp-passwd
+prompt off
+lcd D:\ftp
+cd /home/myftp
+mput *
+prompt on
+bye
+quit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;vbs&quot;&gt;vbs&lt;/h3&gt;
+&lt;p&gt;参考 &lt;a href=&quot;https://m.jb51.net/article/19399.htm&quot;&gt;https://m.jb51.net/article/19399.htm&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://stackoverflow.com/questions/10521300/what-is-correct-syntax-to-use-awk-in-vbscript/61378908#61378908&quot;&gt;https://stackoverflow.com/questions/10521300/what-is-correct-syntax-to-use-awk-in-vbscript/61378908#61378908&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.52pojie.cn/thread-1003908-1-1.html&quot;&gt;https://www.52pojie.cn/thread-1003908-1-1.html&lt;/a&gt;&lt;br /&gt;
+bat脚本通过ssh免输入密码登录，可以用vbs脚本实现, 如下脚本实现远程登录linux服务器，并杀掉旧应用进程，再重启该应用，最后退出命令行窗口功能&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-vbs&quot;&gt;Dim WshShell 
+Set WshShell=WScript.CreateObject(&quot;WScript.Shell&quot;) 
+WshShell.Run &quot;cmd.exe&quot;
+WScript.Sleep 1500 
+WshShell.SendKeys &quot;ssh root@192.168.1.1&quot;
+WshShell.SendKeys &quot;{ENTER}&quot;
+WScript.Sleep 1500 
+WshShell.SendKeys &quot;root&quot;
+WshShell.SendKeys &quot;{ENTER}&quot;
+WScript.Sleep 1500 
+WshShell.SendKeys &quot;cd /home/xxx&quot;
+WshShell.SendKeys &quot;{ENTER}&quot;
+WScript.Sleep 1500 
+WshShell.SendKeys &quot;kill -SIGTERM `ps -ef|grep 'java -jar'|grep -v grep|awk '{{}print $2{}}'`&quot;
+WshShell.SendKeys &quot;{ENTER}&quot;
+WScript.Sleep 1500 
+WshShell.SendKeys &quot;java -jar xxx.jar &amp;gt;&amp;gt; run.log &amp;amp;&quot;
+WshShell.SendKeys &quot;{ENTER}&quot;
+WScript.Sleep 1500 
+WshShell.SendKeys &quot;exit&quot;
+WshShell.SendKeys &quot;{ENTER}&quot;
+WScript.Sleep 1500 
+WshShell.SendKeys &quot;exit&quot;
+WshShell.SendKeys &quot;{ENTER}&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;vbs对于特殊字符，可以使用{}包围该字符，如使用{{}发送{字符&lt;br /&gt;
+此处由于jekyll的正则规则&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Liquid syntax error Variable  was not properly terminated with regexp: /\\}\\}/&lt;/code&gt;, 导致vbs示例代码中只能被迫使用单括号，其实此处正确应该使用{}包裹住{字符。 为了避免该问题，md文件中代码块采用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;raw endraw&lt;/code&gt;方式包裹。大括号到处都是坑啊 :( &lt;a href=&quot;https://stackoverflow.com/questions/3426182/how-to-escape-liquid-template-tags&quot;&gt;https://stackoverflow.com/questions/3426182/how-to-escape-liquid-template-tags&lt;/a&gt; &lt;br /&gt;
+bat脚本可通过&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;start run.vbs&lt;/code&gt;运行run.vbs脚本。&lt;/p&gt;
+
+&lt;h3 id=&quot;bat&quot;&gt;bat&lt;/h3&gt;
+&lt;p&gt;对于整个bat脚本，可综合到一个文件进行执行&lt;/p&gt;
+&lt;div class=&quot;language-bat highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@echo &lt;span class=&quot;na&quot;&gt;off&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;/xx/xx
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;call&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;mvn&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-Dmaven&lt;/span&gt;.test.skip &lt;span class=&quot;na&quot;&gt;-U &lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;clean&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;install&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;pause&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;call&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ftp&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;-s&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;:D&lt;/span&gt;:\ftp\ftp.txt
+&lt;span class=&quot;nb&quot;&gt;pause&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;/xx/xx
+&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;start&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;run&lt;/span&gt;.vbs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">maven 参考 https://blog.csdn.net/turkeyzhou/article/details/9264431 mvn本身也是.bat脚本，使用call，否则程序打包结束会自动退出，可使用pause暂停，手动继续 maven脚本 @echo off cd /xx/xx call mvn -Dmaven.test.skip -U clean package install pause</summary></entry><entry><title type="html">Install ES dump and ES head</title><link href="http://localhost:4000/es/es-dump/es-head/2020/04/15/install-es-dump_and-head.html" rel="alternate" type="text/html" title="Install ES dump and ES head" /><published>2020-04-15T01:00:00+08:00</published><updated>2020-04-15T01:00:00+08:00</updated><id>http://localhost:4000/es/es-dump/es-head/2020/04/15/install-es-dump_and-head</id><content type="html" xml:base="http://localhost:4000/es/es-dump/es-head/2020/04/15/install-es-dump_and-head.html">&lt;h3 id=&quot;es-head&quot;&gt;es-head&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;引用 &lt;a href=&quot;https://github.com/mobz/elasticsearch-head&quot;&gt;https://github.com/mobz/elasticsearch-head&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;git clone git@github.com:mobz/elasticsearch-head.git&lt;/li&gt;
   &lt;li&gt;根据NodeJS镜像制作es-head镜像&lt;br /&gt;
 修改Dockerfile如下
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM node:12.16.2-alpine3.9
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM node:12.16.2-alpine3.9
 COPY . ./elasticsearch-head
 RUN npm config set registry https://registry.npm.taobao.org \
   &amp;amp;&amp;amp; cd elasticsearch-head \
@@ -17,21 +96,21 @@ EXPOSE 9100
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;提前下载phantomjs防止中途卡死&lt;/li&gt;
-  &lt;li&gt;执行&lt;code class=&quot;highlighter-rouge&quot;&gt;docker build -t elasticsearch-head:latest .&lt;/code&gt;可制作该镜像&lt;/li&gt;
+  &lt;li&gt;执行&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker build -t elasticsearch-head:latest .&lt;/code&gt;可制作该镜像&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;es-dump&quot;&gt;es-dump&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;引用 &lt;a href=&quot;https://github.com/taskrabbit/elasticsearch-dump&quot;&gt;https://github.com/taskrabbit/elasticsearch-dump&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;拉取镜像
-&lt;code class=&quot;highlighter-rouge&quot;&gt;docker pull taskrabbit/elasticsearch-dump:v6.25.0&lt;/code&gt;&lt;/li&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker pull taskrabbit/elasticsearch-dump:v6.25.0&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;编写es_dump.sh&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
 
-&lt;span class=&quot;nv&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;date &lt;span class=&quot;s2&quot;&gt;&quot;+%Y%m%d&quot;&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;date_ago&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;date &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$date&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; -1 day&quot;&lt;/span&gt; +%Y%m%d&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;+%Y%m%d&quot;&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;date_ago&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$date&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; -1 day&quot;&lt;/span&gt; +%Y%m%d&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;basedir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/pzx/Workspaces/elk/dumpdata
 &lt;span class=&quot;nv&quot;&gt;bakdir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$basedir&lt;/span&gt;/&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$date_ago&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;ftp_host&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;127.0.0.1
@@ -42,14 +121,14 @@ EXPOSE 9100
 &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;## start daily es backup on &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$date_ago&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; ##&quot;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$bakdir&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;then
   &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;mkdir &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$bakdir&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-  mkdir &lt;span class=&quot;nv&quot;&gt;$bakdir&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$bakdir&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;else
   &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$bakdir&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; already exist&quot;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;fi
 
 
 &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;query all es indices on &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$date_ago&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;indices&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; GET &lt;span class=&quot;s1&quot;&gt;'localhost:9200/_cat/indices/*?v&amp;amp;s=index'&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$date_ago&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; | awk &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'print $3'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;indices&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; GET &lt;span class=&quot;s1&quot;&gt;'localhost:9200/_cat/indices/*?v&amp;amp;s=index'&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$date_ago&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;awk&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'print $3'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;index &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$indices&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do
 &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;start backing up &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$index&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
 docker run &lt;span class=&quot;nt&quot;&gt;--rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--network&lt;/span&gt; host taskrabbit/elasticsearch-dump:v6.25.0 &lt;span class=&quot;nt&quot;&gt;--type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;data &lt;span class=&quot;nt&quot;&gt;--input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;http://localhost:9200/&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$index&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--output&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;|gzip &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$bakdir&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;/&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$index&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;.json.gz
@@ -77,7 +156,7 @@ quit
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;其中如果ES开启了xpack验证, 则需要更改&lt;/p&gt;
-&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;indices&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; elastic_user:elastic_password &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; GET &lt;span class=&quot;s1&quot;&gt;'localhost:9200/_cat/indices/*?v&amp;amp;s=index'&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$date_ago&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; | awk &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'print $3'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;indices&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; elastic_user:elastic_password &lt;span class=&quot;nt&quot;&gt;-X&lt;/span&gt; GET &lt;span class=&quot;s1&quot;&gt;'localhost:9200/_cat/indices/*?v&amp;amp;s=index'&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$date_ago&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;awk&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'print $3'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;以及&lt;/p&gt;
@@ -88,7 +167,7 @@ quit
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;ul&gt;
   &lt;li&gt;编写crontab, 如每日1点执行脚本
-&lt;code class=&quot;highlighter-rouge&quot;&gt;0 1 * * * sh es_dump.sh &amp;gt;&amp;gt; es_dump.log&lt;/code&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0 1 * * * sh es_dump.sh &amp;gt;&amp;gt; es_dump.log&lt;/code&gt;
 查看es_dump.log&lt;/li&gt;
 &lt;/ul&gt;</content><author><name></name></author><summary type="html">es-head 引用 https://github.com/mobz/elasticsearch-head git clone git@github.com:mobz/elasticsearch-head.git 根据NodeJS镜像制作es-head镜像 修改Dockerfile如下 FROM node:12.16.2-alpine3.9 COPY . ./elasticsearch-head RUN npm config set registry https://registry.npm.taobao.org \ &amp;amp;&amp;amp; cd elasticsearch-head \ &amp;amp;&amp;amp; mkdir /tmp/phantomjs \ &amp;amp;&amp;amp; mv phantomjs-2.1.1-linux-x86_64.tar.bz2 /tmp/phantomjs \ &amp;amp;&amp;amp; npm install WORKDIR /elasticsearch-head CMD [&quot;npm&quot;, &quot;run&quot;, &quot;start&quot;] EXPOSE 9100 提前下载phantomjs防止中途卡死 执行docker build -t elasticsearch-head:latest .可制作该镜像</summary></entry><entry><title type="html">Vmware ubuntu share folder on mac</title><link href="http://localhost:4000/vmware/ubuntu/sharefolder/2020/02/16/vmware-ubuntu-share-folder-on-mac.html" rel="alternate" type="text/html" title="Vmware ubuntu share folder on mac" /><published>2020-02-16T01:00:00+08:00</published><updated>2020-02-16T01:00:00+08:00</updated><id>http://localhost:4000/vmware/ubuntu/sharefolder/2020/02/16/vmware-ubuntu-share-folder-on-mac</id><content type="html" xml:base="http://localhost:4000/vmware/ubuntu/sharefolder/2020/02/16/vmware-ubuntu-share-folder-on-mac.html">&lt;h3 id=&quot;mac上的vmwareubuntu设置共享文件夹&quot;&gt;mac上的vmware，ubuntu设置共享文件夹&lt;/h3&gt;
 &lt;ul&gt;
@@ -96,8 +175,8 @@ quit
   &lt;li&gt;/mnt中有hgfs但没共享文件的方法&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.cnblogs.com/jiu0821/p/5946062.html&quot;&gt;https://www.cnblogs.com/jiu0821/p/5946062.html&lt;/a&gt;&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;注意：此处不能添加随机启动后自动挂载，否则会无法启动，进入emergency mode&lt;/code&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;所以：只能每次进行挂载，并检测是否已经挂载&lt;/code&gt;&lt;/p&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;注意：此处不能添加随机启动后自动挂载，否则会无法启动，进入emergency mode&lt;/code&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;所以：只能每次进行挂载，并检测是否已经挂载&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;fix: Welcome to emergency mode&lt;/li&gt;
 &lt;/ul&gt;
@@ -138,7 +217,7 @@ quit
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">mac上的vmware，ubuntu设置共享文件夹 vmware设置中添加共享文件夹 /mnt中有hgfs但没共享文件的方法 https://www.cnblogs.com/jiu0821/p/5946062.html 注意：此处不能添加随机启动后自动挂载，否则会无法启动，进入emergency mode 所以：只能每次进行挂载，并检测是否已经挂载 fix: Welcome to emergency mode https://blog.csdn.net/weixin_38705903/article/details/87890393 https://blog.csdn.net/xiangwanpeng/article/details/78083075 检查是否已经挂载/mnt/hgfs目录 https://www.cnblogs.com/cheyunhua/p/11377599.html LINUX nautilus 命令行命令打开指定文件夹 https://blog.csdn.net/weixin_41123761/article/details/78789332 双击运行.sh文件 https://www.cnblogs.com/shuo1208/p/6744876.html https://www.cnblogs.com/EasonJim/p/7467457.html Called “net usershare info” but it failed: Failed to execute child process “net” https://blog.csdn.net/discoverer100/article/details/103052692 nonempty问题 https://blog.csdn.net/u011770788/article/details/45823793?utm_source=itdadao&amp;amp;utm_medium=referral</summary></entry><entry><title type="html">Problems with Chinese Fonts in iText-PDF</title><link href="http://localhost:4000/java/encoding/itext/2019/10/09/java-encoding-itext.html" rel="alternate" type="text/html" title="Problems with Chinese Fonts in iText-PDF" /><published>2019-10-09T17:00:00+08:00</published><updated>2019-10-09T17:00:00+08:00</updated><id>http://localhost:4000/java/encoding/itext/2019/10/09/java-encoding-itext</id><content type="html" xml:base="http://localhost:4000/java/encoding/itext/2019/10/09/java-encoding-itext.html">&lt;p&gt;一、服务器不再单独维护字体，添加simsun.ttf文件到项目中&lt;br /&gt;
 无法获取到resources中的ttf文件，查询得知需要修改pom文件&lt;br /&gt;
 &lt;a href=&quot;https://stackoverflow.com/questions/44572557/flying-saucer-pdf-table-name-does-not-exist-in-exception-on-ubuntu&quot;&gt;https://stackoverflow.com/questions/44572557/flying-saucer-pdf-table-name-does-not-exist-in-exception-on-ubuntu&lt;/a&gt;&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;resources&amp;gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;resources&amp;gt;
             &amp;lt;resource&amp;gt;
                 &amp;lt;directory&amp;gt;src/main/resources&amp;lt;/directory&amp;gt;
                 &amp;lt;filtering&amp;gt;true&amp;lt;/filtering&amp;gt;
@@ -156,7 +235,7 @@ quit
         &amp;lt;/resources&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;然后直接引用即可&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;addFont(&quot;/fonts/samplefont.ttf&quot;, BaseFont.IDENTITY_H,BaseFont.EMBEDDED);&lt;/code&gt;&lt;/p&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;addFont(&quot;/fonts/samplefont.ttf&quot;, BaseFont.IDENTITY_H,BaseFont.EMBEDDED);&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;二、修改simsun字体为思源宋体&lt;/p&gt;
 &lt;ul&gt;
@@ -189,7 +268,7 @@ quit
   &lt;p&gt;思源黑体 :  Source Han Sans CN&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;修改ccs：&lt;code class=&quot;highlighter-rouge&quot;&gt;font-family: 'Source Han Serif SC';&lt;/code&gt;&lt;br /&gt;
+&lt;p&gt;修改ccs：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;font-family: 'Source Han Serif SC';&lt;/code&gt;&lt;br /&gt;
 Bingo～&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;解决table在pdf中显示不全问题&lt;/li&gt;
@@ -222,7 +301,7 @@ Given a fixed length array arr of integers, duplicate each occurrence of zero, s
 &lt;/ul&gt;
 
 &lt;p&gt;代码:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Solution {
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Solution {
     public void duplicateZeros(int[] arr) {
         if (arr == null || arr.length &amp;lt;= 1) {
             return;
@@ -256,7 +335,7 @@ Given a fixed length array arr of integers, duplicate each occurrence of zero, s
 
 &lt;p&gt;错误案例：&lt;br /&gt;
 Wrong Answer 2: 末尾0需要重复&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Input:
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Input:
 [1,5,2,0,6,8,0,6,0]
 Output:
 [1,5,2,0,0,6,8,6,0]
@@ -264,7 +343,7 @@ Expected:
 [1,5,2,0,0,6,8,0,0]
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Wrong Answer 1: 末尾0不需要重复&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Input:
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Input:
 [9,9,9,4,8,0,0,3,7,2,0,0,0,0,9,1,0,0,1,1,0,5,6,3,1,6,0,0,2,3,4,7,0,3,9,3,6,5,8,9,1,1,3,2,0,0,7,3,3,0,5,7,0,8,1,9,6,3,0,8,8,8,8,0,0,5,0,0,0,3,7,7,7,7,5,1,0,0,8,0,0]
 Output:
 [9,9,9,4,8,0,0,0,3,7,2,0,0,0,0,0,0,0,0,9,1,0,0,0,0,1,1,0,0,5,6,3,1,6,0,0,0,0,2,3,4,7,0,0,3,9,3,6,5,8,9,1,1,3,2,0,0,0,0,7,3,3,0,0,5,7,0,0,8,1,9,6,3,0,0,8,8,8,8,0,0]
@@ -275,9 +354,9 @@ Expected:
 &lt;p&gt;结果：&lt;/p&gt;
 
 &lt;p&gt;Runtime: 1 ms, 打败95.12%&lt;br /&gt;
-Memory Usage: 37.4 MB, 打败100%&lt;/p&gt;</content><author><name></name></author><summary type="html">题目： Given a fixed length array arr of integers, duplicate each occurrence of zero, shifting the remaining elements to the right.</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2019/09/27/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2019-09-27T17:29:35+08:00</published><updated>2019-09-27T17:29:35+08:00</updated><id>http://localhost:4000/jekyll/update/2019/09/27/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2019/09/27/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+Memory Usage: 37.4 MB, 打败100%&lt;/p&gt;</content><author><name></name></author><summary type="html">题目： Given a fixed length array arr of integers, duplicate each occurrence of zero, shifting the remaining elements to the right.</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2019/09/27/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2019-09-27T17:29:35+08:00</published><updated>2019-09-27T17:29:35+08:00</updated><id>http://localhost:4000/jekyll/update/2019/09/27/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2019/09/27/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
 
-&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
 
 &lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
 

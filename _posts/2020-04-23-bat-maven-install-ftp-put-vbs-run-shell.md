@@ -46,6 +46,7 @@ quit
 <https://stackoverflow.com/questions/10521300/what-is-correct-syntax-to-use-awk-in-vbscript/61378908#61378908>  
 <https://www.52pojie.cn/thread-1003908-1-1.html>  
 bat脚本通过ssh免输入密码登录，可以用vbs脚本实现, 如下脚本实现远程登录linux服务器，并杀掉旧应用进程，再重启该应用，最后退出命令行窗口功能  
+{% raw %}
 ```vbs
 Dim WshShell 
 Set WshShell=WScript.CreateObject("WScript.Shell") 
@@ -72,8 +73,10 @@ WScript.Sleep 1500
 WshShell.SendKeys "exit"
 WshShell.SendKeys "{ENTER}"
 ```
-vbs对于特殊字符，可以使用{}包围该字符，如使用{{}发送{字符  
-bat脚本通过`start run.vbs`运行run.vbs脚本。
+{% endraw %}
+vbs对于特殊字符，可以使用{}包围该字符，如使用{&#123;}发送&#123;字符  
+此处由于jekyll的正则规则`Liquid syntax error Variable  was not properly terminated with regexp: /\\}\\}/`, 导致vbs示例代码中只能被迫使用单括号，其实此处正确应该使用{}包裹住&#123;字符。 为了避免该问题，md文件中代码块采用`raw endraw`方式包裹。大括号到处都是坑啊 :( <https://stackoverflow.com/questions/3426182/how-to-escape-liquid-template-tags>   
+bat脚本可通过`start run.vbs`运行run.vbs脚本。
 
 
 ### bat
